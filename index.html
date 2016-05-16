@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+	    <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+		<title>Colored Shapes</title>
+		<style>
+			body{ padding: 0; margin: 0; overflow: hidden;}
+		</style>
+	</head>
+
+	<body onload="init()">
+
+		<script src="js/lib/cocoon-3.0.5/cocoon.js"></script>
+
+		<!-- Tween Library: https://greensock.com/get-started-js -->
+		<script src="js/lib/tweenmax/BezierEasing.js"></script>				<!-- Tween on a bezier curve -->
+		<script src="js/lib/tweenmax/ColorPropsPlugin.min.js"></script>
+		<script src="js/lib/tweenmax/TweenMax.min.js"></script>
+
+		<!-- Framework renderer: http://www.pixijs.com/ (This game is using pixi 1.6) -->
+		<script src="js/lib/pixi-1.6/pixi.dev.js"></script>
+
+		<!-- Sound system -->
+
+		<!-- namespace: window.Util -->
+		<!-- Every objects in this namespace are static -->
+			<!-- Improve the javascript objects -->
+			<script src="js/util/common/Object2.js"></script>
+			<script src="js/util/common/Math2.js"></script>
+			<script src="js/util/common/String2.js"></script>
+			<script src="js/util/common/Color.js"></script>
+
+			<!-- Help to build thing on the scene -->
+			<script src="js/util/display/DisplayObject.js"></script>
+			<script src="js/util/control/Swipe.js"></script>
+
+
+		<!-- //END// namespace: window.Util //END// -->
+
+		<!-- namespace: window.Mobile -->
+			<script src="js/mobile/GameCenter.js"></script>
+			<script src="js/mobile/Store.js"></script>
+		<!-- //END// namespace: window.Mobile //END// -->
+
+		<!-- namespace: window.Graph -->
+			<script src="js/display/graph/Symbol.js"></script>
+			<script src="js/display/graph/GraphElement.js"></script>
+			<script src="js/display/graph/PoolGraph.js"></script>
+		<!-- //END// namespace: window.Graph //END// -->
+
+		<!-- namespace: window.UI -->
+			<script src="js/display/ui/common/Menu.js"></script>
+			<script src="js/display/ui/common/Button.js"></script>
+			<script src="js/display/ui/common/Logo.js"></script>
+
+			<script src="js/display/ui/game/Stat.js"></script>
+			<script src="js/display/ui/game/CircleSwipe.js"></script>
+			<script src="js/display/ui/game/MatchContainer.js"></script>
+			<script src="js/display/ui/game/Match.js"></script>
+		<!-- //END// namespace: window.UI //END// -->
+
+		<!-- namespace: window.Scene -->
+			<script src="js/display/scene/BaseScene.js"></script>
+			<script src="js/display/scene/GameScene.js"></script>
+			<script src="js/display/scene/SplashScene.js"></script>
+		<!-- //END// namespace: window.Scene //END// -->
+
+
+		<!-- namespace: window.I18N -->
+			<script src="js/i18n/translate.js"></script>
+		<!-- //END// namespace: I18N //END// -->
+
+		<!-- namespace: window.CS (Colored Shaped) -->
+			<script src="js/config.js"></script>
+			<script src="js/PlayerInfo.js"></script>
+			<script src="js/Sound.js"></script>
+			<script src="js/Main.js"></script>
+		<!-- //END// namespace: window.CS //END// -->
+		<script>
+			function init()
+			{
+				var main = new CS.Main();
+
+			}
+		</script>
+
+
+	</body>
+
+</html>

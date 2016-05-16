@@ -1,0 +1,894 @@
+<!DOCTYPE html><html><head><title>GameScene.js</title><meta http-equiv="Content-Type" content="text/html" charset="UTF-8"><link rel="stylesheet" media="all" href="../../../docco.css"></head><body><div id="container"><div id="background"></div><div id="jump_to">Jump To &hellip;<div id="jump_wrapper"><div id="jump_page"><a href="../../../index.html" class="source"><span class="file_name">README</span></a><a href="../../../js/Main.js.html" class="source "><span class="base_path">js / </span><span class="file_name">Main.js</span></a><a href="../../../js/PlayerInfo.js.html" class="source "><span class="base_path">js / </span><span class="file_name">PlayerInfo.js</span></a><a href="../../../js/config.js.html" class="source "><span class="base_path">js / </span><span class="file_name">config.js</span></a><a href="../../../js/display/graph/GraphElement.js.html" class="source "><span class="base_path">js / display / graph / </span><span class="file_name">GraphElement.js</span></a><a href="../../../js/display/graph/PoolGraph.js.html" class="source "><span class="base_path">js / display / graph / </span><span class="file_name">PoolGraph.js</span></a><a href="../../../js/display/graph/Symbol.js.html" class="source "><span class="base_path">js / display / graph / </span><span class="file_name">Symbol.js</span></a><a href="../../../js/display/scene/BaseScene.js.html" class="source "><span class="base_path">js / display / scene / </span><span class="file_name">BaseScene.js</span></a><a href="../../../js/display/scene/GameScene.js.html" class="source selected"><span class="base_path">js / display / scene / </span><span class="file_name">GameScene.js</span></a><a href="../../../js/display/scene/SplashScene.js.html" class="source "><span class="base_path">js / display / scene / </span><span class="file_name">SplashScene.js</span></a><a href="../../../js/display/ui/common/Button.js.html" class="source "><span class="base_path">js / display / ui / common / </span><span class="file_name">Button.js</span></a><a href="../../../js/display/ui/common/Logo.js.html" class="source "><span class="base_path">js / display / ui / common / </span><span class="file_name">Logo.js</span></a><a href="../../../js/display/ui/common/Menu.js.html" class="source "><span class="base_path">js / display / ui / common / </span><span class="file_name">Menu.js</span></a><a href="../../../js/display/ui/game/CircleSwipe.js.html" class="source "><span class="base_path">js / display / ui / game / </span><span class="file_name">CircleSwipe.js</span></a><a href="../../../js/display/ui/game/Match.js.html" class="source "><span class="base_path">js / display / ui / game / </span><span class="file_name">Match.js</span></a><a href="../../../js/display/ui/game/MatchContainer.js.html" class="source "><span class="base_path">js / display / ui / game / </span><span class="file_name">MatchContainer.js</span></a><a href="../../../js/display/ui/game/Stat.js.html" class="source "><span class="base_path">js / display / ui / game / </span><span class="file_name">Stat.js</span></a><a href="../../../js/i18n/translate.js.html" class="source "><span class="base_path">js / i18n / </span><span class="file_name">translate.js</span></a><a href="../../../js/lib/cocoon-3.0.5/cocoon.js.html" class="source "><span class="base_path">js / lib / cocoon-3.0.5 / </span><span class="file_name">cocoon.js</span></a><a href="../../../js/lib/pixi-1.6/pixi.dev.js.html" class="source "><span class="base_path">js / lib / pixi-1.6 / </span><span class="file_name">pixi.dev.js</span></a><a href="../../../js/lib/stats.min.js.html" class="source "><span class="base_path">js / lib / </span><span class="file_name">stats.min.js</span></a><a href="../../../js/lib/tweenmax/BezierEasing.js.html" class="source "><span class="base_path">js / lib / tweenmax / </span><span class="file_name">BezierEasing.js</span></a><a href="../../../js/lib/tweenmax/ColorPropsPlugin.min.js.html" class="source "><span class="base_path">js / lib / tweenmax / </span><span class="file_name">ColorPropsPlugin.min.js</span></a><a href="../../../js/lib/tweenmax/TweenMax.min.js.html" class="source "><span class="base_path">js / lib / tweenmax / </span><span class="file_name">TweenMax.min.js</span></a><a href="../../../js/mobile/GameCenter.js.html" class="source "><span class="base_path">js / mobile / </span><span class="file_name">GameCenter.js</span></a><a href="../../../js/mobile/Store.js.html" class="source "><span class="base_path">js / mobile / </span><span class="file_name">Store.js</span></a><a href="../../../js/util/common/Color.js.html" class="source "><span class="base_path">js / util / common / </span><span class="file_name">Color.js</span></a><a href="../../../js/util/common/Math2.js.html" class="source "><span class="base_path">js / util / common / </span><span class="file_name">Math2.js</span></a><a href="../../../js/util/common/Object2.js.html" class="source "><span class="base_path">js / util / common / </span><span class="file_name">Object2.js</span></a><a href="../../../js/util/common/String2.js.html" class="source "><span class="base_path">js / util / common / </span><span class="file_name">String2.js</span></a><a href="../../../js/util/control/Swipe.js.html" class="source "><span class="base_path">js / util / control / </span><span class="file_name">Swipe.js</span></a><a href="../../../js/util/display/DisplayObject.js.html" class="source "><span class="base_path">js / util / display / </span><span class="file_name">DisplayObject.js</span></a></div></div></div><table cellpadding="0" cellspacing="0"><thead><tr><th class="docs"><h1>GameScene.js</h1><div class="filepath">js/display/scene/</div></th><th class="code"></th></tr></thead><tbody><tr id="section-1"><td class="docs"><div class="pilwrap"><a href="#section-1" class="pilcrow">&#182;</a></div>
+</td><td class="code"><div class="highlight"><pre><span class="s1">&#39;use strict&#39;</span><span class="p">;</span></pre></div></td></tr><tr id="section-2"><td class="docs"><div class="pilwrap"><a href="#section-2" class="pilcrow">&#182;</a></div><h2>GameScene class</h2>
+</td><td class="code"><div class="highlight"><pre><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">exports</span><span class="p">){</span></pre></div></td></tr><tr id="section-3"><td class="docs"><div class="pilwrap"><a href="#section-3" class="pilcrow">&#182;</a></div><h2>Constructor</h2>
+</td><td class="code"><div class="highlight"><pre><span class="kd">function</span> <span class="nx">GameScene</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="nx">exports</span><span class="p">.</span><span class="nx">BaseScene</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s1">&#39;GameScene&#39;</span><span class="p">);</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">turn</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">score</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">nbWon</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">nbColorMatch</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">nbSymbolMatch</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">timeLeft</span> <span class="o">=</span> <span class="nx">CS</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">levelDesign</span><span class="p">.</span><span class="nx">timeLimit</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">cmdColorPercent</span> <span class="o">=</span> <span class="nx">CS</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">levelDesign</span><span class="p">.</span><span class="nx">colorPercent</span><span class="p">;</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">retractedAt</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">hasStart</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">playing</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">GameScene</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">=</span> <span class="nx">GameScene</span><span class="p">;</span>
+<span class="nx">GameScene</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">exports</span><span class="p">.</span><span class="nx">BaseScene</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span>
+
+<span class="nx">GameScene</span><span class="p">.</span><span class="nx">COLOR_MODE</span> <span class="o">=</span> <span class="s1">&#39;color_mode&#39;</span><span class="p">;</span>
+<span class="nx">GameScene</span><span class="p">.</span><span class="nx">SHAPE_MODE</span> <span class="o">=</span> <span class="s1">&#39;shape_mode&#39;</span><span class="p">;</span>
+<span class="nx">GameScene</span><span class="p">.</span><span class="nx">DIFFICULTY_EASY</span> <span class="o">=</span> <span class="s1">&#39;easy&#39;</span><span class="p">;</span>
+<span class="nx">GameScene</span><span class="p">.</span><span class="nx">DIFFICULTY_HARD</span> <span class="o">=</span> <span class="s1">&#39;hard&#39;</span><span class="p">;</span></pre></div></td></tr><tr id="section-4"><td class="docs"><div class="pilwrap"><a href="#section-4" class="pilcrow">&#182;</a></div><h2>ShareHandler</h2>
+</td><td class="code"><div class="highlight"><pre><span class="nx">GameScene</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">shareHandler</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">btnMore</span><span class="p">.</span><span class="nx">visible</span> <span class="o">==</span> <span class="kc">false</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+
+  <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">btnMore</span><span class="p">.</span><span class="nx">visible</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">btnGameCenter</span><span class="p">.</span><span class="nx">visible</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">btnLeaderboard</span><span class="p">.</span><span class="nx">visible</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+
+  <span class="kd">var</span> <span class="nx">backBtn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">UI</span><span class="p">.</span><span class="nx">Button</span><span class="p">(</span><span class="nx">PIXI</span><span class="p">.</span><span class="nx">Texture</span><span class="p">.</span><span class="nx">fromFrame</span><span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">getFrameCircleUI</span><span class="p">()</span>  <span class="p">));</span>
+  <span class="nx">backBtn</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">backBtn</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="mf">1.27</span><span class="p">;</span>
+
+  <span class="kd">var</span> <span class="nx">symbolBack</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PIXI</span><span class="p">.</span><span class="nx">Sprite</span><span class="p">(</span><span class="nx">PIXI</span><span class="p">.</span><span class="nx">Texture</span><span class="p">.</span><span class="nx">fromImage</span><span class="p">(</span> <span class="s2">&quot;resources/Back-icon.png&quot;</span> <span class="p">));</span>
+
+  <span class="nx">symbolBack</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">symbolBack</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">;</span>
+  <span class="nx">symbolBack</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="o">-</span><span class="mi">50</span><span class="p">;</span>
+  <span class="nx">symbolBack</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="o">-</span><span class="mi">40</span><span class="p">;</span>
+
+  <span class="nx">backBtn</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="o">~~</span><span class="p">(</span><span class="nx">CS</span><span class="p">.</span><span class="nx">display</span><span class="p">.</span><span class="nx">width</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
+  <span class="nx">backBtn</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="o">~~</span><span class="p">(</span><span class="nx">CS</span><span class="p">.</span><span class="nx">display</span><span class="p">.</span><span class="nx">height</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="mi">270</span><span class="p">;</span>
+
+  <span class="nx">backBtn</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="nx">symbolBack</span><span class="p">);</span>
+
+  <span class="kd">var</span> <span class="nx">F4F</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">UI</span><span class="p">.</span><span class="nx">Button</span><span class="p">(</span><span class="nx">PIXI</span><span class="p">.</span><span class="nx">Texture</span><span class="p">.</span><span class="nx">fromImage</span><span class="p">(</span><span class="s2">&quot;resources/F4F-icon.png&quot;</span><span class="p">));</span>
+  <span class="nx">F4F</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="o">~~</span><span class="p">(</span><span class="nx">CS</span><span class="p">.</span><span class="nx">display</span><span class="p">.</span><span class="nx">width</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>  <span class="o">-</span> <span class="mi">270</span><span class="p">;</span>
+  <span class="nx">F4F</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="o">~~</span><span class="p">(</span><span class="nx">CS</span><span class="p">.</span><span class="nx">display</span><span class="p">.</span><span class="nx">height</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
+
+  <span class="kd">var</span> <span class="nx">shareBtn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">UI</span><span class="p">.</span><span class="nx">Button</span><span class="p">(</span><span class="nx">PIXI</span><span class="p">.</span><span class="nx">Texture</span><span class="p">.</span><span class="nx">fromFrame</span><span class="p">(</span> <span class="s2">&quot;circle-&quot;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">logo</span><span class="p">.</span><span class="nx">color1</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">));</span>
+  <span class="nx">shareBtn</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">shareBtn</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="mf">1.27</span><span class="p">;</span>
+  <span class="nx">shareBtn</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="o">~~</span><span class="p">(</span><span class="nx">CS</span><span class="p">.</span><span class="nx">display</span><span class="p">.</span><span class="nx">width</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>  <span class="o">+</span> <span class="mi">270</span><span class="p">;</span>
+  <span class="nx">shareBtn</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="o">~~</span><span class="p">(</span><span class="nx">CS</span><span class="p">.</span><span class="nx">display</span><span class="p">.</span><span class="nx">height</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
+
+  <span class="kd">var</span> <span class="nx">shareLayer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PIXI</span><span class="p">.</span><span class="nx">Sprite</span><span class="p">(</span><span class="nx">PIXI</span><span class="p">.</span><span class="nx">Texture</span><span class="p">.</span><span class="nx">fromImage</span><span class="p">(</span> <span class="s2">&quot;resources/Share-icon.png&quot;</span> <span class="p">));</span>
+  <span class="nx">shareLayer</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">shareLayer</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">;</span>
+  <span class="nx">shareLayer</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="o">-</span><span class="mi">40</span><span class="p">;</span>
+  <span class="nx">shareLayer</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="o">-</span><span class="mi">50</span><span class="p">;</span>
+
+  <span class="nx">shareBtn</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="nx">shareLayer</span><span class="p">);</span>
+
+  <span class="nx">shareBtn</span><span class="p">.</span><span class="nx">onSubmit</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">Cocoon</span><span class="p">.</span><span class="nx">Social</span><span class="p">.</span><span class="nx">share</span><span class="p">(</span><span class="nx">I18N</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;share_text&#39;</span><span class="p">));</span>
+  <span class="p">}</span>
+
+
+  <span class="nx">F4F</span><span class="p">.</span><span class="nx">onSubmit</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">Cocoon</span><span class="p">.</span><span class="nx">App</span><span class="p">.</span><span class="nx">openURL</span><span class="p">(</span><span class="nx">CS</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">F4FUrl</span><span class="p">);</span>
+  <span class="p">};</span>
+
+  <span class="nx">backBtn</span><span class="p">.</span><span class="nx">onSubmit</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">self</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="nx">backBtn</span><span class="p">);</span>
+    <span class="nx">self</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="nx">F4F</span><span class="p">);</span>
+    <span class="nx">self</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="nx">shareBtn</span><span class="p">);</span>
+    <span class="nx">self</span><span class="p">.</span><span class="nx">btnMore</span><span class="p">.</span><span class="nx">visible</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="nx">self</span><span class="p">.</span><span class="nx">btnGameCenter</span><span class="p">.</span><span class="nx">visible</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="nx">self</span><span class="p">.</span><span class="nx">btnLeaderboard</span><span class="p">.</span><span class="nx">visible</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="p">};</span>
+
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="nx">F4F</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="nx">backBtn</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="nx">shareBtn</span><span class="p">);</span>
+
+<span class="p">}</span></pre></div></td></tr><tr id="section-5"><td class="docs"><div class="pilwrap"><a href="#section-5" class="pilcrow">&#182;</a></div><h2>AddMoreBtn</h2>
+
+<p>Add the "more" button display at the end of the game.
+It will trigger the F4F and share buttons display.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">GameScene</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">addMoreBtn</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">doAnim</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">btnMore</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">UI</span><span class="p">.</span><span class="nx">Button</span><span class="p">(</span><span class="nx">PIXI</span><span class="p">.</span><span class="nx">Texture</span><span class="p">.</span><span class="nx">fromFrame</span><span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">getFrameCircleUI</span><span class="p">()</span> <span class="p">));</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">btnMore</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">btnMore</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="mf">1.27</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">btnMore</span><span class="p">.</span><span class="nx">onSubmit</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">shareHandler</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+
+  <span class="kd">var</span> <span class="nx">symbolMore</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PIXI</span><span class="p">.</span><span class="nx">Sprite</span><span class="p">(</span><span class="nx">PIXI</span><span class="p">.</span><span class="nx">Texture</span><span class="p">.</span><span class="nx">fromFrame</span><span class="p">(</span> <span class="s2">&quot;More-icon&quot;</span> <span class="p">));</span>
+
+  <span class="nx">symbolMore</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">symbolMore</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">;</span>
+  <span class="nx">symbolMore</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="o">~~</span><span class="p">(</span><span class="o">-</span><span class="nx">symbolMore</span><span class="p">.</span><span class="nx">width</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="cm">/*+ 20*/</span><span class="p">;</span>
+  <span class="nx">symbolMore</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="o">~~</span><span class="p">(</span><span class="o">-</span><span class="nx">symbolMore</span><span class="p">.</span><span class="nx">height</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="cm">/* + 20*/</span><span class="p">;</span>
+  <span class="nx">symbolMore</span><span class="p">.</span><span class="nx">tint</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getTintUI</span><span class="p">();</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">btnMore</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="nx">symbolMore</span><span class="p">);</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">btnMore</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="o">~~</span><span class="p">(</span><span class="nx">CS</span><span class="p">.</span><span class="nx">display</span><span class="p">.</span><span class="nx">width</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">btnMore</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="o">~~</span><span class="p">(</span><span class="nx">CS</span><span class="p">.</span><span class="nx">display</span><span class="p">.</span><span class="nx">height</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="mi">270</span><span class="p">;</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">btnMore</span><span class="p">);</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="nx">doAnim</span><span class="p">)</span> <span class="k">this</span><span class="p">.</span><span class="nx">animUI</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">btnMore</span><span class="p">);</span>
+
+<span class="p">}</span></pre></div></td></tr><tr id="section-6"><td class="docs"><div class="pilwrap"><a href="#section-6" class="pilcrow">&#182;</a></div><h2>AddFinalScore</h2>
+
+<p>Add the final score at the end of the game</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">GameScene</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">addFinalScore</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">doAnim</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">group</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PIXI</span><span class="p">.</span><span class="nx">DisplayObjectContainer</span><span class="p">();</span>
+
+  <span class="kd">var</span> <span class="nx">colorText</span> <span class="o">=</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">matchContainer</span><span class="p">.</span><span class="nx">isGrey</span><span class="p">())</span> <span class="o">?</span> <span class="mh">0xffffff</span> <span class="o">:</span> <span class="mh">0xbababa</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">scoreText</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PIXI</span><span class="p">.</span><span class="nx">BitmapText</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">score</span><span class="p">.</span><span class="nx">toString</span><span class="p">(),</span> <span class="p">{</span> <span class="nx">font</span><span class="o">:</span> <span class="s2">&quot;100px VeraBd&quot;</span><span class="p">,</span> <span class="nx">tint</span><span class="o">:</span> <span class="nx">colorText</span><span class="p">,</span> <span class="nx">align</span><span class="o">:</span> <span class="s2">&quot;center&quot;</span> <span class="p">});</span>
+
+  <span class="nx">group</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">scoreText</span><span class="p">);</span>
+
+  <span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">score</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="p">)</span> <span class="o">?</span> <span class="s2">&quot;POINTS&quot;</span> <span class="o">:</span> <span class="s2">&quot;POINT&quot;</span><span class="p">;</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">pointsText</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PIXI</span><span class="p">.</span><span class="nx">BitmapText</span><span class="p">(</span><span class="nx">s</span><span class="p">,</span> <span class="p">{</span> <span class="nx">font</span><span class="o">:</span> <span class="s2">&quot;50px VeraBd&quot;</span><span class="p">,</span> <span class="nx">tint</span><span class="o">:</span> <span class="nx">colorText</span><span class="p">,</span> <span class="nx">align</span><span class="o">:</span> <span class="s2">&quot;center&quot;</span> <span class="p">});</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">pointsText</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+
+
+  <span class="nx">group</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">pointsText</span><span class="p">);</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">pointsText</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="o">~~</span><span class="p">(</span><span class="nx">group</span><span class="p">.</span><span class="nx">width</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">pointsText</span><span class="p">.</span><span class="nx">width</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">scoreText</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="o">~~</span><span class="p">(</span><span class="nx">group</span><span class="p">.</span><span class="nx">width</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">scoreText</span><span class="p">.</span><span class="nx">width</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
+
+  <span class="nx">group</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="o">~~</span><span class="p">(</span><span class="nx">CS</span><span class="p">.</span><span class="nx">display</span><span class="p">.</span><span class="nx">width</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="nx">group</span><span class="p">.</span><span class="nx">width</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
+  <span class="nx">group</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="o">~~</span><span class="p">(</span><span class="nx">CS</span><span class="p">.</span><span class="nx">display</span><span class="p">.</span><span class="nx">height</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="mi">70</span><span class="p">;</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="nx">group</span><span class="p">);</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="nx">doAnim</span><span class="p">)</span> <span class="k">this</span><span class="p">.</span><span class="nx">animUI</span><span class="p">(</span><span class="nx">group</span><span class="p">);</span>
+
+<span class="p">}</span></pre></div></td></tr><tr id="section-7"><td class="docs"><div class="pilwrap"><a href="#section-7" class="pilcrow">&#182;</a></div><h2>AddRestartBtn</h2>
+
+<p>Add the "restart" at the end of the game. It just restart the scene.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">GameScene</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">addRestartBtn</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">doAnim</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">btnRestart</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">UI</span><span class="p">.</span><span class="nx">Button</span><span class="p">(</span><span class="nx">PIXI</span><span class="p">.</span><span class="nx">Texture</span><span class="p">.</span><span class="nx">fromFrame</span><span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">getFrameCircleUI</span><span class="p">()</span> <span class="p">));</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">btnRestart</span><span class="p">.</span><span class="nx">onSubmit</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">onRestartSubmit</span><span class="p">;</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">btnRestart</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">btnRestart</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="mf">1.27</span><span class="p">;</span>
+
+  <span class="kd">var</span> <span class="nx">symbolRestart</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PIXI</span><span class="p">.</span><span class="nx">Sprite</span><span class="p">(</span><span class="nx">PIXI</span><span class="p">.</span><span class="nx">Texture</span><span class="p">.</span><span class="nx">fromFrame</span><span class="p">(</span> <span class="s2">&quot;Replay-icon&quot;</span> <span class="p">));</span>
+
+  <span class="nx">symbolRestart</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">symbolRestart</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="mf">0.7</span><span class="p">;</span>
+  <span class="nx">symbolRestart</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="o">~~</span><span class="p">(</span><span class="o">-</span><span class="nx">symbolRestart</span><span class="p">.</span><span class="nx">width</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="cm">/*+ 20*/</span><span class="p">;</span>
+  <span class="nx">symbolRestart</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="o">~~</span><span class="p">(</span><span class="o">-</span><span class="nx">symbolRestart</span><span class="p">.</span><span class="nx">height</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="cm">/* + 20*/</span><span class="p">;</span>
+  <span class="nx">symbolRestart</span><span class="p">.</span><span class="nx">tint</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getTintUI</span><span class="p">();</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">btnRestart</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="nx">symbolRestart</span><span class="p">);</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">btnRestart</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="o">~~</span><span class="p">(</span><span class="nx">CS</span><span class="p">.</span><span class="nx">display</span><span class="p">.</span><span class="nx">width</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">btnRestart</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="o">~~</span><span class="p">(</span><span class="nx">CS</span><span class="p">.</span><span class="nx">display</span><span class="p">.</span><span class="nx">height</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">270</span><span class="p">;</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">btnRestart</span><span class="p">);</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="nx">doAnim</span><span class="p">)</span> <span class="k">this</span><span class="p">.</span><span class="nx">animUI</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">btnRestart</span><span class="p">);</span>
+<span class="p">}</span></pre></div></td></tr><tr id="section-8"><td class="docs"><div class="pilwrap"><a href="#section-8" class="pilcrow">&#182;</a></div><h2>AddAchievementsBtn</h2>
+
+<p>Add the "achievements" at the end of the game.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">GameScene</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">addAchievementsBtn</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">doAnim</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">btnGameCenter</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">UI</span><span class="p">.</span><span class="nx">Button</span><span class="p">(</span><span class="nx">PIXI</span><span class="p">.</span><span class="nx">Texture</span><span class="p">.</span><span class="nx">fromFrame</span><span class="p">(</span> <span class="s2">&quot;circle-&quot;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">logo</span><span class="p">.</span><span class="nx">color2</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">));</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">btnGameCenter</span><span class="p">.</span><span class="nx">onSubmit</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">showAchievements</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">btnGameCenter</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">btnGameCenter</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="mf">1.27</span><span class="p">;</span>
+
+  <span class="kd">var</span> <span class="nx">symbolCup</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PIXI</span><span class="p">.</span><span class="nx">Sprite</span><span class="p">(</span><span class="nx">PIXI</span><span class="p">.</span><span class="nx">Texture</span><span class="p">.</span><span class="nx">fromFrame</span><span class="p">(</span> <span class="s2">&quot;Cup-icon&quot;</span> <span class="p">));</span>
+
+  <span class="nx">symbolCup</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">symbolCup</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">;</span>
+  <span class="nx">symbolCup</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="o">~~</span><span class="p">(</span><span class="o">-</span><span class="nx">symbolCup</span><span class="p">.</span><span class="nx">width</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">-</span><span class="mi">3</span><span class="p">;</span>
+  <span class="nx">symbolCup</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="o">~~</span><span class="p">(</span><span class="o">-</span><span class="nx">symbolCup</span><span class="p">.</span><span class="nx">height</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">btnGameCenter</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="nx">symbolCup</span><span class="p">);</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">btnGameCenter</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="o">~~</span><span class="p">(</span><span class="nx">CS</span><span class="p">.</span><span class="nx">display</span><span class="p">.</span><span class="nx">width</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>  <span class="o">-</span> <span class="mi">270</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">btnGameCenter</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="o">~~</span><span class="p">(</span><span class="nx">CS</span><span class="p">.</span><span class="nx">display</span><span class="p">.</span><span class="nx">height</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">btnGameCenter</span><span class="p">);</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="nx">doAnim</span><span class="p">)</span> <span class="k">this</span><span class="p">.</span><span class="nx">animUI</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">btnGameCenter</span><span class="p">);</span>
+<span class="p">}</span></pre></div></td></tr><tr id="section-9"><td class="docs"><div class="pilwrap"><a href="#section-9" class="pilcrow">&#182;</a></div><h2>ShowAchievements</h2>
+
+<p>Show the achievements game center thing</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">GameScene</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">showAchievements</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;showAchievements&#39;</span><span class="p">);</span>
+  <span class="nx">Mobile</span><span class="p">.</span><span class="nx">GameCenter</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="kd">function</span> <span class="nx">executeCmd</span><span class="p">(){</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">Mobile</span><span class="p">.</span><span class="nx">GameCenter</span><span class="p">.</span><span class="nx">getSocialService</span><span class="p">())</span> <span class="k">return</span><span class="p">;</span>
+
+    <span class="nx">Mobile</span><span class="p">.</span><span class="nx">GameCenter</span><span class="p">.</span><span class="nx">getSocialService</span><span class="p">().</span><span class="nx">showAchievements</span><span class="p">();</span>
+
+  <span class="p">});</span>
+<span class="p">}</span></pre></div></td></tr><tr id="section-10"><td class="docs"><div class="pilwrap"><a href="#section-10" class="pilcrow">&#182;</a></div><h2>AddLeaderboardBtn</h2>
+
+<p>Add the "leaderboard" button at the end of the game</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">GameScene</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">addLeaderboardBtn</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">doAnim</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">btnLeaderboard</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">UI</span><span class="p">.</span><span class="nx">Button</span><span class="p">(</span><span class="nx">PIXI</span><span class="p">.</span><span class="nx">Texture</span><span class="p">.</span><span class="nx">fromFrame</span><span class="p">(</span> <span class="s2">&quot;circle-&quot;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">logo</span><span class="p">.</span><span class="nx">color1</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">));</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">btnLeaderboard</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">btnLeaderboard</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="mf">1.27</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">btnLeaderboard</span><span class="p">.</span><span class="nx">onSubmit</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">Mobile</span><span class="p">.</span><span class="nx">GameCenter</span><span class="p">.</span><span class="nx">showLeaderboard</span><span class="p">();</span>
+  <span class="p">};</span>
+
+  <span class="kd">var</span> <span class="nx">symbolLaber</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PIXI</span><span class="p">.</span><span class="nx">Sprite</span><span class="p">(</span><span class="nx">PIXI</span><span class="p">.</span><span class="nx">Texture</span><span class="p">.</span><span class="nx">fromFrame</span><span class="p">(</span> <span class="s2">&quot;Ladder-icon&quot;</span> <span class="p">));</span>
+
+  <span class="nx">symbolLaber</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">symbolLaber</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">;</span>
+  <span class="nx">symbolLaber</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="o">~~</span><span class="p">(</span><span class="o">-</span><span class="nx">symbolLaber</span><span class="p">.</span><span class="nx">width</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
+  <span class="nx">symbolLaber</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="o">~~</span><span class="p">(</span><span class="o">-</span><span class="nx">symbolLaber</span><span class="p">.</span><span class="nx">height</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">-</span><span class="mi">5</span><span class="p">;</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">btnLeaderboard</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="nx">symbolLaber</span><span class="p">);</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">btnLeaderboard</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="o">~~</span><span class="p">(</span><span class="nx">CS</span><span class="p">.</span><span class="nx">display</span><span class="p">.</span><span class="nx">width</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>  <span class="o">+</span> <span class="mi">270</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">btnLeaderboard</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="o">~~</span><span class="p">(</span><span class="nx">CS</span><span class="p">.</span><span class="nx">display</span><span class="p">.</span><span class="nx">height</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">btnLeaderboard</span><span class="p">);</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="nx">doAnim</span><span class="p">)</span> <span class="k">this</span><span class="p">.</span><span class="nx">animUI</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">btnLeaderboard</span><span class="p">);</span>
+<span class="p">}</span></pre></div></td></tr><tr id="section-11"><td class="docs"><div class="pilwrap"><a href="#section-11" class="pilcrow">&#182;</a></div><h2>GetFrameCircleUI</h2>
+</td><td class="code"><div class="highlight"><pre><span class="nx">GameScene</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getFrameCircleUI</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">matchContainer</span><span class="p">.</span><span class="nx">isGrey</span><span class="p">())</span> <span class="o">?</span> <span class="s2">&quot;ffffff&quot;</span> <span class="o">:</span> <span class="s2">&quot;bababa&quot;</span><span class="p">;</span>
+  <span class="k">return</span> <span class="s2">&quot;circle-&quot;</span> <span class="o">+</span> <span class="nx">x</span><span class="p">;</span>
+<span class="p">}</span></pre></div></td></tr><tr id="section-12"><td class="docs"><div class="pilwrap"><a href="#section-12" class="pilcrow">&#182;</a></div><h2>GetTintUI</h2>
+</td><td class="code"><div class="highlight"><pre><span class="nx">GameScene</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getTintUI</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">matchContainer</span><span class="p">.</span><span class="nx">isGrey</span><span class="p">()</span> <span class="p">)</span> <span class="o">?</span>  <span class="mh">0xBABABA</span> <span class="o">:</span> <span class="mh">0xFFFFFF</span><span class="p">;</span>
+<span class="p">}</span></pre></div></td></tr><tr id="section-13"><td class="docs"><div class="pilwrap"><a href="#section-13" class="pilcrow">&#182;</a></div><h2>Create</h2>
+</td><td class="code"><div class="highlight"><pre><span class="nx">GameScene</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">create</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">mode</span> <span class="o">=</span> <span class="nx">GameScene</span><span class="p">.</span><span class="nx">SHAPE_MODE</span><span class="p">;</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">matchContainer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">UI</span><span class="p">.</span><span class="nx">MatchContainer</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">matchContainer</span><span class="p">);</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">addMenu</span><span class="p">();</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">addLogo</span><span class="p">();</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">addStats</span><span class="p">();</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">arrow</span> <span class="o">=</span>  <span class="k">new</span> <span class="nx">PIXI</span><span class="p">.</span><span class="nx">Sprite</span><span class="p">(</span><span class="nx">PIXI</span><span class="p">.</span><span class="nx">Texture</span><span class="p">.</span><span class="nx">fromFrame</span><span class="p">(</span><span class="s2">&quot;resources/SmallArrowTrail.png&quot;</span><span class="p">));</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">arrow</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">arrow</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="o">~~</span><span class="p">(</span><span class="nx">CS</span><span class="p">.</span><span class="nx">display</span><span class="p">.</span><span class="nx">width</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">arrow</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="o">~~</span><span class="p">(</span><span class="nx">CS</span><span class="p">.</span><span class="nx">display</span><span class="p">.</span><span class="nx">height</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">arrow</span><span class="p">.</span><span class="nx">height</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">arrow</span><span class="p">);</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">circleSwipe</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">UI</span><span class="p">.</span><span class="nx">CircleSwipe</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">matchContainer</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">circleSwipe</span><span class="p">.</span><span class="nx">setDistanceMax</span><span class="p">(</span><span class="mi">303</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">circleSwipe</span><span class="p">.</span><span class="nx">setDurationMax</span><span class="p">(</span><span class="mf">0.35</span><span class="p">);</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">circleSwipe</span><span class="p">.</span><span class="nx">onAddEntity</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">addEntityHandler</span><span class="p">;</span>
+
+  <span class="kd">var</span> <span class="nx">swipe</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">circleSwipe</span><span class="p">.</span><span class="nx">getSwipe</span><span class="p">();</span>
+  <span class="nx">swipe</span><span class="p">.</span><span class="nx">desactive</span><span class="p">();</span>
+
+  <span class="nx">swipe</span><span class="p">.</span><span class="nx">setBottomCallback</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">self</span><span class="p">.</span><span class="nx">controlSwipe</span><span class="p">(</span><span class="nx">UI</span><span class="p">.</span><span class="nx">CircleSwipe</span><span class="p">.</span><span class="nx">CENTER</span><span class="p">,</span> <span class="nx">UI</span><span class="p">.</span><span class="nx">CircleSwipe</span><span class="p">.</span><span class="nx">BOTTOM</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">swipe</span><span class="p">.</span><span class="nx">setLeftCallback</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">self</span><span class="p">.</span><span class="nx">controlSwipe</span><span class="p">(</span><span class="nx">UI</span><span class="p">.</span><span class="nx">CircleSwipe</span><span class="p">.</span><span class="nx">CENTER</span><span class="p">,</span> <span class="nx">UI</span><span class="p">.</span><span class="nx">CircleSwipe</span><span class="p">.</span><span class="nx">LEFT</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">swipe</span><span class="p">.</span><span class="nx">setRightCallback</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">self</span><span class="p">.</span><span class="nx">controlSwipe</span><span class="p">(</span><span class="nx">UI</span><span class="p">.</span><span class="nx">CircleSwipe</span><span class="p">.</span><span class="nx">CENTER</span><span class="p">,</span> <span class="nx">UI</span><span class="p">.</span><span class="nx">CircleSwipe</span><span class="p">.</span><span class="nx">RIGHT</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">swipe</span><span class="p">.</span><span class="nx">setTopCallback</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">self</span><span class="p">.</span><span class="nx">controlSwipe</span><span class="p">(</span><span class="nx">UI</span><span class="p">.</span><span class="nx">CircleSwipe</span><span class="p">.</span><span class="nx">CENTER</span><span class="p">,</span> <span class="nx">UI</span><span class="p">.</span><span class="nx">CircleSwipe</span><span class="p">.</span><span class="nx">TOP</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">circleSwipe</span><span class="p">);</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">tipText</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PIXI</span><span class="p">.</span><span class="nx">BitmapText</span><span class="p">(</span><span class="s1">&#39;SLIDE TO PLAY&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">font</span><span class="o">:</span> <span class="s2">&quot;50px VeraBd&quot;</span><span class="p">,</span> <span class="nx">fill</span><span class="o">:</span> <span class="s2">&quot;white&quot;</span> <span class="p">});</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">tipText</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">circleSwipe</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span> <span class="o">-</span> <span class="o">~~</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">tipText</span><span class="p">.</span><span class="nx">width</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">circleSwipe</span><span class="p">.</span><span class="nx">center</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">tipText</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">circleSwipe</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="mi">180</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">tipText</span><span class="p">.</span><span class="nx">alpha</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">;</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">tipText</span><span class="p">);</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">pxPerSec</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">circleSwipe</span><span class="p">.</span><span class="nx">distanceMax</span><span class="o">/</span><span class="nx">CS</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">levelDesign</span><span class="p">.</span><span class="nx">timeLimit</span><span class="p">;</span> <span class="c1">// Pixel parcouru par seconde</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">intro</span><span class="p">();</span>
+
+
+<span class="p">}</span></pre></div></td></tr><tr id="section-14"><td class="docs"><div class="pilwrap"><a href="#section-14" class="pilcrow">&#182;</a></div><h2>Intro</h2>
+</td><td class="code"><div class="highlight"><pre><span class="nx">GameScene</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">intro</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">launch</span><span class="p">();</span>
+
+<span class="p">}</span></pre></div></td></tr><tr id="section-15"><td class="docs"><div class="pilwrap"><a href="#section-15" class="pilcrow">&#182;</a></div><h2>Launch</h2>
+
+<p>Launch the game</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">GameScene</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">launch</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="nx">CS</span><span class="p">.</span><span class="nx">launch</span><span class="o">++</span><span class="p">;</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">circleSwipe</span><span class="p">.</span><span class="nx">getSwipe</span><span class="p">().</span><span class="nx">reactive</span><span class="p">();</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">levels</span> <span class="o">=</span> <span class="p">[];</span>
+
+  <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="mi">2</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">mode</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">randMode</span><span class="p">();</span>
+    <span class="kd">var</span> <span class="nx">ignorePieces</span> <span class="o">=</span> <span class="p">{};</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="nx">i</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span> <span class="nx">ignorePieces</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">levels</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">meta</span><span class="p">.</span><span class="nx">discover</span><span class="p">.</span><span class="nx">toString</span><span class="p">()]</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">levels</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
+      <span class="nx">meta</span><span class="o">:</span> <span class="nx">CS</span><span class="p">.</span><span class="nx">pool</span><span class="p">.</span><span class="nx">generateStep</span><span class="p">(</span><span class="nx">mode</span><span class="p">,</span> <span class="nx">ignorePieces</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">randDifficulty</span><span class="p">()),</span>
+      <span class="nx">mode</span><span class="o">:</span> <span class="nx">mode</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">displayRound</span><span class="p">();</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">circleSwipe</span><span class="p">.</span><span class="nx">addCenter</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">currentRound</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">discover</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">levels</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">meta</span><span class="p">.</span><span class="nx">discover</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">levels</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">meta</span><span class="p">.</span><span class="nx">discover</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">circleSwipe</span><span class="p">.</span><span class="nx">addCenter</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">levels</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">meta</span><span class="p">.</span><span class="nx">discover</span><span class="p">);</span>
+
+  <span class="kd">var</span> <span class="nx">compatibleDir</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getCompatibleDir</span><span class="p">();</span>
+  <span class="kd">var</span> <span class="nx">targetOffset</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">circleSwipe</span><span class="p">.</span><span class="nx">getOffsetContainer</span><span class="p">(</span><span class="nx">compatibleDir</span><span class="p">);</span>
+
+  <span class="kd">var</span> <span class="nx">arrowDuration</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">widthMax</span> <span class="o">=</span> <span class="mi">155</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">tlIntro</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TimelineMax</span><span class="p">({</span><span class="nx">repeat</span><span class="o">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">});</span>
+
+  <span class="kd">var</span> <span class="nx">centerContainer</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">circleSwipe</span><span class="p">.</span><span class="nx">getContainer</span><span class="p">(</span><span class="nx">UI</span><span class="p">.</span><span class="nx">CircleSwipe</span><span class="p">.</span><span class="nx">CENTER</span><span class="p">);</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">tlIntro</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="nx">centerContainer</span><span class="p">.</span><span class="nx">scale</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span> <span class="mf">0.8</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span><span class="mf">0.8</span><span class="p">,</span> <span class="nx">ease</span><span class="o">:</span><span class="nx">Linear</span><span class="p">.</span><span class="nx">easeNone</span><span class="p">},</span> <span class="s1">&#39;start&#39;</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">tlIntro</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="nx">centerContainer</span><span class="p">.</span><span class="nx">scale</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span> <span class="mf">1.2</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span><span class="mf">1.2</span><span class="p">,</span> <span class="nx">ease</span><span class="o">:</span><span class="nx">Linear</span><span class="p">.</span><span class="nx">easeNone</span><span class="p">},</span> <span class="s1">&#39;start+=0.1&#39;</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">tlIntro</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="nx">centerContainer</span><span class="p">.</span><span class="nx">scale</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span> <span class="mf">0.9</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span><span class="mf">0.9</span><span class="p">,</span> <span class="nx">ease</span><span class="o">:</span><span class="nx">Linear</span><span class="p">.</span><span class="nx">easeNone</span><span class="p">},</span> <span class="s1">&#39;start+=0.2&#39;</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">tlIntro</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="nx">centerContainer</span><span class="p">.</span><span class="nx">scale</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span><span class="mi">1</span><span class="p">},</span> <span class="s1">&#39;start+=0.3&#39;</span><span class="p">);</span>
+
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">tlIntro</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">tipText</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="p">{</span><span class="nx">alpha</span><span class="o">:</span> <span class="mi">1</span><span class="p">},</span> <span class="s1">&#39;start&#39;</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">tlIntro</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">tipText</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="p">{</span><span class="nx">alpha</span><span class="o">:</span> <span class="mf">0.3</span><span class="p">},</span> <span class="s1">&#39;start+=0.3&#39;</span><span class="p">);</span>
+
+  <span class="k">switch</span><span class="p">(</span><span class="nx">compatibleDir</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">case</span> <span class="nx">UI</span><span class="p">.</span><span class="nx">CircleSwipe</span><span class="p">.</span><span class="nx">TOP</span><span class="o">:</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">arrow</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span> <span class="o">+=</span> <span class="o">~~</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">arrow</span><span class="p">.</span><span class="nx">height</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">arrow</span><span class="p">.</span><span class="nx">rotation</span> <span class="o">=</span> <span class="nx">Util</span><span class="p">.</span><span class="nx">Math2</span><span class="p">.</span><span class="nx">degToRad</span><span class="p">(</span><span class="mi">90</span><span class="p">);</span>
+
+      <span class="k">this</span><span class="p">.</span><span class="nx">tlIntro</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">arrow</span><span class="p">,</span> <span class="nx">arrowDuration</span><span class="p">,</span> <span class="p">{</span><span class="nx">width</span><span class="o">:</span> <span class="nx">widthMax</span><span class="p">},</span> <span class="s1">&#39;start&#39;</span><span class="p">);</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">tlIntro</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">arrow</span><span class="p">.</span><span class="nx">position</span><span class="p">,</span> <span class="nx">arrowDuration</span><span class="p">,</span> <span class="p">{</span><span class="nx">y</span><span class="o">:</span> <span class="nx">targetOffset</span><span class="p">.</span><span class="nx">y</span><span class="p">},</span> <span class="s1">&#39;start&#39;</span><span class="p">);</span>
+
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="nx">UI</span><span class="p">.</span><span class="nx">CircleSwipe</span><span class="p">.</span><span class="nx">RIGHT</span><span class="o">:</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">arrow</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">y</span> <span class="o">+=</span> <span class="k">this</span><span class="p">.</span><span class="nx">arrow</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">arrow</span><span class="p">.</span><span class="nx">rotation</span> <span class="o">=</span> <span class="nx">Util</span><span class="p">.</span><span class="nx">Math2</span><span class="p">.</span><span class="nx">degToRad</span><span class="p">(</span><span class="mi">180</span><span class="p">);</span>
+
+      <span class="k">this</span><span class="p">.</span><span class="nx">tlIntro</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">arrow</span><span class="p">,</span> <span class="nx">arrowDuration</span><span class="p">,</span> <span class="p">{</span><span class="nx">width</span><span class="o">:</span> <span class="nx">widthMax</span><span class="p">},</span> <span class="s1">&#39;start&#39;</span><span class="p">);</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">tlIntro</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">arrow</span><span class="p">.</span><span class="nx">position</span><span class="p">,</span> <span class="nx">arrowDuration</span><span class="p">,</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span> <span class="nx">targetOffset</span><span class="p">.</span><span class="nx">x</span><span class="p">},</span> <span class="s1">&#39;start&#39;</span><span class="p">);</span>
+
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="nx">UI</span><span class="p">.</span><span class="nx">CircleSwipe</span><span class="p">.</span><span class="nx">BOTTOM</span><span class="o">:</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">arrow</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span> <span class="o">-=</span> <span class="o">~~</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">arrow</span><span class="p">.</span><span class="nx">height</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">arrow</span><span class="p">.</span><span class="nx">rotation</span> <span class="o">=</span> <span class="nx">Util</span><span class="p">.</span><span class="nx">Math2</span><span class="p">.</span><span class="nx">degToRad</span><span class="p">(</span><span class="mi">270</span><span class="p">);</span>
+
+      <span class="k">this</span><span class="p">.</span><span class="nx">tlIntro</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">arrow</span><span class="p">,</span> <span class="nx">arrowDuration</span><span class="p">,</span> <span class="p">{</span><span class="nx">width</span><span class="o">:</span> <span class="nx">widthMax</span><span class="p">},</span> <span class="s1">&#39;start&#39;</span><span class="p">);</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">tlIntro</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">arrow</span><span class="p">.</span><span class="nx">position</span><span class="p">,</span> <span class="nx">arrowDuration</span><span class="p">,</span> <span class="p">{</span><span class="nx">y</span><span class="o">:</span> <span class="nx">targetOffset</span><span class="p">.</span><span class="nx">y</span><span class="p">},</span> <span class="s1">&#39;start&#39;</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="nx">UI</span><span class="p">.</span><span class="nx">CircleSwipe</span><span class="p">.</span><span class="nx">LEFT</span><span class="o">:</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">tlIntro</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">arrow</span><span class="p">,</span> <span class="nx">arrowDuration</span><span class="p">,</span> <span class="p">{</span><span class="nx">width</span><span class="o">:</span> <span class="nx">widthMax</span><span class="p">},</span> <span class="s1">&#39;start&#39;</span><span class="p">);</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">tlIntro</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">arrow</span><span class="p">.</span><span class="nx">position</span><span class="p">,</span> <span class="nx">arrowDuration</span><span class="p">,</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span> <span class="nx">targetOffset</span><span class="p">.</span><span class="nx">x</span><span class="p">},</span> <span class="s1">&#39;start&#39;</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">tlIntro</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">arrow</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="p">{</span><span class="nx">alpha</span><span class="o">:</span> <span class="mi">0</span><span class="p">});</span>
+
+
+
+<span class="p">}</span></pre></div></td></tr><tr id="section-16"><td class="docs"><div class="pilwrap"><a href="#section-16" class="pilcrow">&#182;</a></div><h2>IncrScore</h2>
+</td><td class="code"><div class="highlight"><pre><span class="nx">GameScene</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">incrScore</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">by</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">score</span> <span class="o">+=</span> <span class="nx">by</span><span class="p">;</span>
+<span class="p">}</span></pre></div></td></tr><tr id="section-17"><td class="docs"><div class="pilwrap"><a href="#section-17" class="pilcrow">&#182;</a></div><h2>ErrorAnim</h2>
+
+<p>Fire the error anim on any error</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">GameScene</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">errorAnim</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">graphics</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PIXI</span><span class="p">.</span><span class="nx">Graphics</span><span class="p">();</span>
+
+  <span class="nx">graphics</span><span class="p">.</span><span class="nx">beginFill</span><span class="p">(</span><span class="mh">0xff120c</span><span class="p">);</span>
+  <span class="nx">graphics</span><span class="p">.</span><span class="nx">drawRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="k">this</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">y</span><span class="p">,</span> <span class="nx">CS</span><span class="p">.</span><span class="nx">display</span><span class="p">.</span><span class="nx">width</span><span class="o">+</span><span class="k">this</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">y</span><span class="p">,</span> <span class="nx">CS</span><span class="p">.</span><span class="nx">display</span><span class="p">.</span><span class="nx">height</span><span class="p">);</span>
+
+  <span class="nx">graphics</span><span class="p">.</span><span class="nx">alpha</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="nx">graphics</span><span class="p">);</span>
+
+  <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">tl</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TimelineMax</span><span class="p">();</span>
+  <span class="nx">tl</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="nx">graphics</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="p">{</span><span class="nx">alpha</span><span class="o">:</span> <span class="mf">0.75</span><span class="p">});</span>
+  <span class="nx">tl</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="nx">graphics</span><span class="p">,</span> <span class="mf">0.90</span><span class="p">,</span> <span class="p">{</span><span class="nx">alpha</span><span class="o">:</span> <span class="mi">0</span><span class="p">});</span>
+
+<span class="p">}</span></pre></div></td></tr><tr id="section-18"><td class="docs"><div class="pilwrap"><a href="#section-18" class="pilcrow">&#182;</a></div><h2>Retract</h2>
+
+<p>Retract each graphs to the center point</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">GameScene</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">retract</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">useTimeline</span><span class="p">)</span>
+<span class="p">{</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">retractAnim</span> <span class="o">=</span> <span class="p">(</span><span class="nx">useTimeline</span><span class="p">)</span> <span class="o">?</span> <span class="nx">useTimeline</span> <span class="o">:</span> <span class="k">new</span> <span class="nx">TimelineMax</span><span class="p">();</span>
+
+  <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+
+  <span class="nx">UI</span><span class="p">.</span><span class="nx">CircleSwipe</span><span class="p">.</span><span class="nx">SELECTABLE_DIRS</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dir</span><span class="p">){</span>
+
+    <span class="kd">var</span> <span class="nx">container</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">circleSwipe</span><span class="p">.</span><span class="nx">getContainer</span><span class="p">(</span><span class="nx">dir</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">tweenObject</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">circleSwipe</span><span class="p">.</span><span class="nx">getDist</span><span class="p">(</span><span class="nx">dir</span><span class="p">,</span> <span class="nx">UI</span><span class="p">.</span><span class="nx">CircleSwipe</span><span class="p">.</span><span class="nx">CENTER</span><span class="p">);</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="nx">tweenObject</span><span class="p">.</span><span class="nx">x</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="k">delete</span> <span class="nx">tweenObject</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">tweenObject</span><span class="p">.</span><span class="nx">y</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="k">delete</span> <span class="nx">tweenObject</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="nx">tweenObject</span><span class="p">.</span><span class="nx">x</span><span class="p">)</span> <span class="nx">tweenObject</span><span class="p">.</span><span class="nx">x</span> <span class="o">+=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">tweenObject</span><span class="p">.</span><span class="nx">y</span><span class="p">)</span> <span class="nx">tweenObject</span><span class="p">.</span><span class="nx">y</span> <span class="o">+=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+
+    <span class="nx">tweenObject</span><span class="p">.</span><span class="nx">ease</span> <span class="o">=</span> <span class="nx">Linear</span><span class="p">.</span><span class="nx">easeNone</span><span class="p">;</span>
+
+    <span class="nx">self</span><span class="p">.</span><span class="nx">retractAnim</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span> <span class="nx">container</span><span class="p">,</span> <span class="nx">self</span><span class="p">.</span><span class="nx">timeLeft</span><span class="p">,</span>  <span class="nx">tweenObject</span><span class="p">,</span> <span class="s1">&#39;start&#39;</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">retractAnim</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">self</span><span class="p">.</span><span class="nx">gameOver</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+  <span class="p">});</span>
+
+<span class="p">}</span></pre></div></td></tr><tr id="section-19"><td class="docs"><div class="pilwrap"><a href="#section-19" class="pilcrow">&#182;</a></div><h2>GameOver</h2>
+
+<p>End game.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">GameScene</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">gameOver</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">byTime</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">playing</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+
+  <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">playing</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">circleSwipe</span><span class="p">.</span><span class="nx">getSwipe</span><span class="p">().</span><span class="nx">desactive</span><span class="p">();</span>
+
+
+  <span class="kd">var</span> <span class="nx">myHighscore</span> <span class="o">=</span> <span class="nx">CS</span><span class="p">.</span><span class="nx">PlayerInfo</span><span class="p">.</span><span class="nx">getHighscore</span><span class="p">();</span>
+  <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">score</span> <span class="o">&gt;</span> <span class="nx">myHighscore</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">CS</span><span class="p">.</span><span class="nx">PlayerInfo</span><span class="p">.</span><span class="nx">setHighscore</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">score</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nx">Mobile</span><span class="p">.</span><span class="nx">GameCenter</span><span class="p">.</span><span class="nx">submitScore</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">score</span><span class="p">);</span>
+
+  <span class="nx">CS</span><span class="p">.</span><span class="nx">lastScore</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">score</span><span class="p">;</span>
+
+  <span class="nx">CS</span><span class="p">.</span><span class="nx">PlayerInfo</span><span class="p">.</span><span class="nx">unlockAchievement</span><span class="p">(</span><span class="s1">&#39;points&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">score</span><span class="p">);</span>
+
+  <span class="nx">CS</span><span class="p">.</span><span class="nx">PlayerInfo</span><span class="p">.</span><span class="nx">incrColorMatch</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">nbColorMatch</span><span class="p">);</span>
+  <span class="nx">CS</span><span class="p">.</span><span class="nx">PlayerInfo</span><span class="p">.</span><span class="nx">incrSymbolMatch</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">nbSymbolMatch</span><span class="p">);</span>
+
+  <span class="nx">CS</span><span class="p">.</span><span class="nx">PlayerInfo</span><span class="p">.</span><span class="nx">unlockAchievement</span><span class="p">(</span><span class="s1">&#39;colors&#39;</span><span class="p">,</span> <span class="nx">CS</span><span class="p">.</span><span class="nx">PlayerInfo</span><span class="p">.</span><span class="nx">getColorMatch</span><span class="p">());</span>
+  <span class="nx">CS</span><span class="p">.</span><span class="nx">PlayerInfo</span><span class="p">.</span><span class="nx">unlockAchievement</span><span class="p">(</span><span class="s1">&#39;symbols&#39;</span><span class="p">,</span> <span class="nx">CS</span><span class="p">.</span><span class="nx">PlayerInfo</span><span class="p">.</span><span class="nx">getSymbolMatch</span><span class="p">());</span>
+
+
+  <span class="kd">var</span> <span class="nx">tl</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TimelineMax</span><span class="p">();</span>
+
+  <span class="nx">UI</span><span class="p">.</span><span class="nx">CircleSwipe</span><span class="p">.</span><span class="nx">DIRS</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dir</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">self</span><span class="p">.</span><span class="nx">circleSwipe</span><span class="p">.</span><span class="nx">dirs</span><span class="p">[</span><span class="nx">dir</span><span class="p">]</span> <span class="o">||</span> <span class="o">!</span><span class="nx">self</span><span class="p">.</span><span class="nx">circleSwipe</span><span class="p">.</span><span class="nx">dirs</span><span class="p">[</span><span class="nx">dir</span><span class="p">].</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">var</span> <span class="nx">container</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">circleSwipe</span><span class="p">.</span><span class="nx">getContainer</span><span class="p">(</span><span class="nx">dir</span><span class="p">);</span>
+    <span class="nx">tl</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="nx">container</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="p">{</span><span class="nx">alpha</span><span class="o">:</span><span class="mi">0</span><span class="p">},</span> <span class="s1">&#39;start&#39;</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">TweenLite</span><span class="p">.</span><span class="nx">to</span><span class="p">([</span><span class="k">this</span><span class="p">.</span><span class="nx">matchContainer</span><span class="p">.</span><span class="nx">match</span><span class="p">.</span><span class="nx">tipsText</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">matchContainer</span><span class="p">.</span><span class="nx">match</span><span class="p">.</span><span class="nx">titleText</span><span class="p">],</span> <span class="mf">0.2</span><span class="p">,</span> <span class="p">{</span><span class="nx">alpha</span><span class="o">:</span> <span class="mi">0</span><span class="p">});</span>
+
+
+
+  <span class="nx">tl</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">CS</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">ads</span><span class="p">.</span><span class="nx">interstitial</span><span class="p">.</span><span class="nx">current</span><span class="o">++</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">CS</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">ads</span><span class="p">.</span><span class="nx">interstitial</span><span class="p">.</span><span class="nx">eachGame</span> <span class="o">==</span> <span class="nx">CS</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">ads</span><span class="p">.</span><span class="nx">interstitial</span><span class="p">.</span><span class="nx">current</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span><span class="p">(</span><span class="nx">CS</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">ads</span><span class="p">.</span><span class="nx">interstitial</span><span class="p">.</span><span class="nx">ready</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">CS</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">ads</span><span class="p">.</span><span class="nx">test</span> <span class="o">||</span> <span class="nx">CS</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">ads</span><span class="p">.</span><span class="nx">show</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nx">Cocoon</span><span class="p">.</span><span class="nx">Ad</span><span class="p">.</span><span class="nx">showInterstitial</span><span class="p">();</span>
+      <span class="p">}</span>
+      <span class="nx">CS</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">ads</span><span class="p">.</span><span class="nx">interstitial</span><span class="p">.</span><span class="nx">current</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nx">self</span><span class="p">.</span><span class="nx">addFinalScore</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+
+    <span class="nx">self</span><span class="p">.</span><span class="nx">addLogo</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+    <span class="nx">self</span><span class="p">.</span><span class="nx">addMenu</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+    <span class="nx">self</span><span class="p">.</span><span class="nx">addStats</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+
+    <span class="nx">self</span><span class="p">.</span><span class="nx">addRestartBtn</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+    <span class="nx">self</span><span class="p">.</span><span class="nx">addAchievementsBtn</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+    <span class="nx">self</span><span class="p">.</span><span class="nx">addLeaderboardBtn</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+
+    <span class="nx">self</span><span class="p">.</span><span class="nx">addMoreBtn</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+
+  <span class="p">});</span>
+
+
+<span class="p">}</span></pre></div></td></tr><tr id="section-20"><td class="docs"><div class="pilwrap"><a href="#section-20" class="pilcrow">&#182;</a></div><h2>DisplayRound</h2>
+
+<p>Display the current round</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">GameScene</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">displayRound</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span>
+<span class="p">{</span>
+
+  <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">currentRound</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">levels</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">circleSwipe</span><span class="p">.</span><span class="nx">addTop</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">currentRound</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">pieces</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">self</span><span class="p">.</span><span class="nx">selectPiece</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">UI</span><span class="p">.</span><span class="nx">CircleSwipe</span><span class="p">.</span><span class="nx">TOP</span><span class="p">);</span>
+  <span class="p">});</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">circleSwipe</span><span class="p">.</span><span class="nx">addRight</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">currentRound</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">pieces</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">self</span><span class="p">.</span><span class="nx">selectPiece</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nx">UI</span><span class="p">.</span><span class="nx">CircleSwipe</span><span class="p">.</span><span class="nx">RIGHT</span><span class="p">);</span>
+  <span class="p">});</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">circleSwipe</span><span class="p">.</span><span class="nx">addBottom</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">currentRound</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">pieces</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">self</span><span class="p">.</span><span class="nx">selectPiece</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nx">UI</span><span class="p">.</span><span class="nx">CircleSwipe</span><span class="p">.</span><span class="nx">BOTTOM</span><span class="p">);</span>
+  <span class="p">});</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">circleSwipe</span><span class="p">.</span><span class="nx">addLeft</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">currentRound</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">pieces</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">self</span><span class="p">.</span><span class="nx">selectPiece</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nx">UI</span><span class="p">.</span><span class="nx">CircleSwipe</span><span class="p">.</span><span class="nx">LEFT</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">mode</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">currentRound</span><span class="p">.</span><span class="nx">mode</span><span class="p">;</span>
+
+<span class="p">}</span></pre></div></td></tr><tr id="section-21"><td class="docs"><div class="pilwrap"><a href="#section-21" class="pilcrow">&#182;</a></div><h2>GetCompatibleDir</h2>
+
+<p>get the match solution.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">GameScene</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getCompatibleDir</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">isPieceCompatible</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">currentRound</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">pieces</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="nx">UI</span><span class="p">.</span><span class="nx">CircleSwipe</span><span class="p">.</span><span class="nx">TOP</span><span class="p">;</span>
+  <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">isPieceCompatible</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">currentRound</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">pieces</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="nx">UI</span><span class="p">.</span><span class="nx">CircleSwipe</span><span class="p">.</span><span class="nx">RIGHT</span><span class="p">;</span>
+  <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">isPieceCompatible</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">currentRound</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">pieces</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="nx">UI</span><span class="p">.</span><span class="nx">CircleSwipe</span><span class="p">.</span><span class="nx">BOTTOM</span><span class="p">;</span>
+  <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">isPieceCompatible</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">currentRound</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">pieces</span><span class="p">[</span><span class="mi">3</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="nx">UI</span><span class="p">.</span><span class="nx">CircleSwipe</span><span class="p">.</span><span class="nx">LEFT</span><span class="p">;</span>
+
+
+<span class="p">}</span></pre></div></td></tr><tr id="section-22"><td class="docs"><div class="pilwrap"><a href="#section-22" class="pilcrow">&#182;</a></div><h2>IsPieceCompatible</h2>
+
+<p>Check if the graphs match</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">GameScene</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">isPieceCompatible</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">piece</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">currentRound</span><span class="p">.</span><span class="nx">mode</span> <span class="o">==</span> <span class="nx">GameScene</span><span class="p">.</span><span class="nx">COLOR_MODE</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="nx">currentRound</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">discover</span><span class="p">.</span><span class="nx">getColor</span><span class="p">()</span> <span class="o">==</span> <span class="nx">piece</span><span class="p">.</span><span class="nx">getColor</span><span class="p">())</span>
+    <span class="o">||</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">currentRound</span><span class="p">.</span><span class="nx">mode</span> <span class="o">==</span> <span class="nx">GameScene</span><span class="p">.</span><span class="nx">SHAPE_MODE</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="nx">currentRound</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">discover</span><span class="p">.</span><span class="nx">getSymbol</span><span class="p">()</span> <span class="o">==</span> <span class="nx">piece</span><span class="p">.</span><span class="nx">getSymbol</span><span class="p">())</span>
+  <span class="p">)</span>
+<span class="p">}</span></pre></div></td></tr><tr id="section-23"><td class="docs"><div class="pilwrap"><a href="#section-23" class="pilcrow">&#182;</a></div><h2>SelectPiece</h2>
+
+<p>Select a graph and check if we won or lost</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">GameScene</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">selectPiece</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pieceId</span><span class="p">,</span> <span class="nx">dir</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">piece</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">currentRound</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">pieces</span><span class="p">[</span><span class="nx">pieceId</span><span class="p">];</span>
+
+  <span class="kd">var</span> <span class="nx">choice</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">currentRound</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">pieces</span><span class="p">[</span><span class="nx">pieceId</span><span class="p">];</span>
+  <span class="kd">var</span> <span class="nx">useLastMode</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">winTurn</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">wonRound</span><span class="p">();</span>
+    <span class="nx">useLastMode</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">else</span>
+  <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">loseRound</span><span class="p">(</span><span class="nx">piece</span><span class="p">);</span>
+    <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">generateRound</span><span class="p">(</span><span class="nx">useLastMode</span><span class="p">);</span>
+<span class="p">}</span></pre></div></td></tr><tr id="section-24"><td class="docs"><div class="pilwrap"><a href="#section-24" class="pilcrow">&#182;</a></div><h2>WonRound</h2>
+
+<p>We won our round yeaa !</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">GameScene</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">wonRound</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">turn</span><span class="o">++</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">incrScore</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">mode</span> <span class="o">==</span> <span class="nx">GameScene</span><span class="p">.</span><span class="nx">COLOR_MODE</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">nbColorMatch</span><span class="o">++</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">nbSymbolMatch</span><span class="o">++</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">addTime</span><span class="p">();</span>
+<span class="p">}</span></pre></div></td></tr><tr id="section-25"><td class="docs"><div class="pilwrap"><a href="#section-25" class="pilcrow">&#182;</a></div><h2>LoseRounded</h2>
+
+<p>We lost ..</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">GameScene</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">loseRound</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">selectPiece</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">stopAnims</span><span class="p">();</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">errorAnim</span><span class="p">();</span>
+
+  <span class="kd">var</span> <span class="nx">compatibleDir</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getCompatibleDir</span><span class="p">()</span>
+  <span class="kd">var</span> <span class="nx">centerContainer</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">circleSwipe</span><span class="p">.</span><span class="nx">getContainer</span><span class="p">(</span><span class="nx">UI</span><span class="p">.</span><span class="nx">CircleSwipe</span><span class="p">.</span><span class="nx">CENTER</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">compatibleContainer</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">circleSwipe</span><span class="p">.</span><span class="nx">getContainer</span><span class="p">(</span><span class="nx">compatibleDir</span><span class="p">);</span>
+
+  <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+  <span class="nx">UI</span><span class="p">.</span><span class="nx">CircleSwipe</span><span class="p">.</span><span class="nx">SELECTABLE_DIRS</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dir</span><span class="p">){</span>
+    <span class="kd">var</span> <span class="nx">container</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">circleSwipe</span><span class="p">.</span><span class="nx">getContainer</span><span class="p">(</span><span class="nx">dir</span><span class="p">);</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="nx">dir</span> <span class="o">==</span> <span class="nx">compatibleDir</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+
+    <span class="nx">self</span><span class="p">.</span><span class="nx">circleSwipe</span><span class="p">.</span><span class="nx">shiftDir</span><span class="p">(</span><span class="nx">dir</span><span class="p">);</span>
+
+  <span class="p">});</span>
+
+  <span class="kd">var</span> <span class="nx">tl</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TimelineMax</span><span class="p">();</span>
+
+  <span class="nx">tl</span><span class="p">.</span><span class="nx">to</span><span class="p">([</span><span class="nx">compatibleContainer</span><span class="p">.</span><span class="nx">scale</span><span class="p">,</span> <span class="nx">centerContainer</span><span class="p">.</span><span class="nx">scale</span><span class="p">],</span> <span class="mf">0.65</span><span class="p">,</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span><span class="mf">1.3</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span><span class="mf">1.3</span><span class="p">},</span> <span class="s1">&#39;start&#39;</span><span class="p">);</span>
+  <span class="nx">tl</span><span class="p">.</span><span class="nx">to</span><span class="p">([</span><span class="nx">compatibleContainer</span><span class="p">,</span> <span class="nx">centerContainer</span><span class="p">],</span> <span class="mf">0.3</span><span class="p">,</span> <span class="p">{</span><span class="nx">alpha</span><span class="o">:</span> <span class="mi">0</span><span class="p">},</span> <span class="s1">&#39;start+=0.5&#39;</span><span class="p">);</span>
+
+
+  <span class="nx">tl</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">matchContainer</span><span class="p">.</span><span class="nx">match</span><span class="p">.</span><span class="nx">titleText</span><span class="p">.</span><span class="nx">position</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="p">{</span><span class="nx">y</span><span class="o">:</span> <span class="o">-</span><span class="mi">150</span><span class="o">-</span><span class="k">this</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">y</span><span class="p">},</span> <span class="s1">&#39;start&#39;</span><span class="p">);</span>
+
+  <span class="kd">var</span> <span class="nx">scaleBy</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">toDest</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">matchContainer</span><span class="p">.</span><span class="nx">match</span><span class="p">.</span><span class="nx">tipsText</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="mi">150</span>
+  <span class="p">};</span>
+
+
+  <span class="nx">toDest</span><span class="p">.</span><span class="nx">ease</span> <span class="o">=</span> <span class="nx">Elastic</span><span class="p">.</span><span class="nx">easeOut</span><span class="p">;</span>
+  <span class="nx">tl</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">matchContainer</span><span class="p">.</span><span class="nx">match</span><span class="p">.</span><span class="nx">tipsText</span><span class="p">.</span><span class="nx">position</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">toDest</span><span class="p">,</span> <span class="s1">&#39;start&#39;</span><span class="p">);</span>
+
+  <span class="nx">tl</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">self</span><span class="p">.</span><span class="nx">gameOver</span><span class="p">();</span>
+  <span class="p">});</span>
+
+<span class="p">}</span></pre></div></td></tr><tr id="section-26"><td class="docs"><div class="pilwrap"><a href="#section-26" class="pilcrow">&#182;</a></div><h2>AddTime</h2>
+
+<p>Add some time to our game. It's fire each time we won a round.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">GameScene</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">addTime</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cb</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">stopAnims</span><span class="p">();</span>
+
+  <span class="kd">var</span> <span class="nx">tl</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TimelineMax</span><span class="p">();</span>
+
+  <span class="kd">var</span> <span class="nx">addDistance</span> <span class="o">=</span> <span class="o">~~</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">circleSwipe</span><span class="p">.</span><span class="nx">distanceMax</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
+
+
+  <span class="nx">UI</span><span class="p">.</span><span class="nx">CircleSwipe</span><span class="p">.</span><span class="nx">SELECTABLE_DIRS</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dir</span><span class="p">){</span>
+
+    <span class="kd">var</span> <span class="nx">container</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">circleSwipe</span><span class="p">.</span><span class="nx">getContainer</span><span class="p">(</span><span class="nx">dir</span><span class="p">);</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="nx">dir</span> <span class="o">==</span> <span class="nx">UI</span><span class="p">.</span><span class="nx">CircleSwipe</span><span class="p">.</span><span class="nx">TOP</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">container</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="nx">container</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">y</span> <span class="o">-</span> <span class="nx">addDistance</span><span class="p">,</span> <span class="nx">self</span><span class="p">.</span><span class="nx">circleSwipe</span><span class="p">.</span><span class="nx">oriTopPos</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nx">dir</span> <span class="o">==</span> <span class="nx">UI</span><span class="p">.</span><span class="nx">CircleSwipe</span><span class="p">.</span><span class="nx">RIGHT</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">container</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">(</span><span class="nx">container</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">addDistance</span><span class="p">,</span> <span class="nx">self</span><span class="p">.</span><span class="nx">circleSwipe</span><span class="p">.</span><span class="nx">oriRightPos</span><span class="p">.</span><span class="nx">x</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nx">dir</span> <span class="o">==</span> <span class="nx">UI</span><span class="p">.</span><span class="nx">CircleSwipe</span><span class="p">.</span><span class="nx">BOTTOM</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">container</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">(</span><span class="nx">container</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">addDistance</span><span class="p">,</span> <span class="nx">self</span><span class="p">.</span><span class="nx">circleSwipe</span><span class="p">.</span><span class="nx">oriBottomPos</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nx">dir</span> <span class="o">==</span> <span class="nx">UI</span><span class="p">.</span><span class="nx">CircleSwipe</span><span class="p">.</span><span class="nx">LEFT</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">container</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="nx">container</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span> <span class="o">-</span> <span class="nx">addDistance</span><span class="p">,</span> <span class="nx">self</span><span class="p">.</span><span class="nx">circleSwipe</span><span class="p">.</span><span class="nx">oriLeftPos</span><span class="p">.</span><span class="nx">x</span><span class="p">);</span>
+    <span class="p">}</span>
+
+  <span class="p">});</span>
+
+
+  <span class="kd">var</span> <span class="nx">leftContainer</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">circleSwipe</span><span class="p">.</span><span class="nx">getContainer</span><span class="p">(</span><span class="nx">UI</span><span class="p">.</span><span class="nx">CircleSwipe</span><span class="p">.</span><span class="nx">LEFT</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">currentDistance</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">circleSwipe</span><span class="p">.</span><span class="nx">distanceMax</span><span class="cm">/* - (leftContainer.position.x - this.circleSwipe.oriLeftPos.x)*/</span><span class="p">;</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">timeLeft</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nx">CS</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">levelDesign</span><span class="p">.</span><span class="nx">timeLimit</span> <span class="o">-</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">nbWon</span> <span class="o">*</span> <span class="mf">0.1</span><span class="p">));</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">nbWon</span><span class="o">++</span><span class="p">;</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">retract</span><span class="p">();</span>
+
+<span class="p">}</span>
+
+<span class="nx">GameScene</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">stopAnims</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">retractAnim</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">retractAnim</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">retractAnim</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">addTimeAnim</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">addTimeAnim</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">addTimeAnim</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="p">}</span>
+
+<span class="p">}</span></pre></div></td></tr><tr id="section-27"><td class="docs"><div class="pilwrap"><a href="#section-27" class="pilcrow">&#182;</a></div><h2>RandMode</h2>
+
+<p>generate another mode</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">GameScene</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">randMode</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span>
+<span class="p">{</span>
+
+  <span class="kd">var</span> <span class="nx">genMode</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">turn</span> <span class="o">&lt;</span> <span class="nx">CS</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">levelDesign</span><span class="p">.</span><span class="nx">colorAt</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="nx">genMode</span> <span class="o">=</span> <span class="nx">GameScene</span><span class="p">.</span><span class="nx">SHAPE_MODE</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nx">Util</span><span class="p">.</span><span class="nx">Math2</span><span class="p">.</span><span class="nx">randomInt</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">cmdColorPercent</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="nx">genMode</span> <span class="o">=</span> <span class="nx">GameScene</span><span class="p">.</span><span class="nx">COLOR_MODE</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">cmdColorPercent</span> <span class="o">-=</span> <span class="nx">CS</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">levelDesign</span><span class="p">.</span><span class="nx">colorPercentDecrBy</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">else</span>
+  <span class="p">{</span>
+    <span class="nx">genMode</span> <span class="o">=</span> <span class="nx">GameScene</span><span class="p">.</span><span class="nx">SHAPE_MODE</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">cmdColorPercent</span> <span class="o">=</span> <span class="nx">CS</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">levelDesign</span><span class="p">.</span><span class="nx">colorPercent</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="nx">genMode</span><span class="p">;</span>
+<span class="p">}</span></pre></div></td></tr><tr id="section-28"><td class="docs"><div class="pilwrap"><a href="#section-28" class="pilcrow">&#182;</a></div><h2>RandDifficulty</h2>
+
+<p>Generate a difficulty</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">GameScene</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">randDifficulty</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">step</span> <span class="o">=</span> <span class="o">~~</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">turn</span><span class="o">/</span><span class="mi">10</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">percent</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">-</span> <span class="p">(</span><span class="nx">step</span><span class="o">*</span><span class="mi">10</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">genDifficulty</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">percent</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nx">Util</span><span class="p">.</span><span class="nx">Math2</span><span class="p">.</span><span class="nx">randomInt</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="nx">percent</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="nx">genDifficulty</span> <span class="o">=</span> <span class="nx">GameScene</span><span class="p">.</span><span class="nx">DIFFICULTY_EASY</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">else</span>
+  <span class="p">{</span>
+    <span class="nx">genDifficulty</span> <span class="o">=</span> <span class="nx">GameScene</span><span class="p">.</span><span class="nx">DIFFICULTY_HARD</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="nx">genDifficulty</span><span class="p">;</span>
+<span class="p">}</span></pre></div></td></tr><tr id="section-29"><td class="docs"><div class="pilwrap"><a href="#section-29" class="pilcrow">&#182;</a></div><h2>ControlSwipe</h2>
+
+<p>Translate the center graph to the selected direction. The first
+swipe execute the StartGame action</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">GameScene</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">controlSwipe</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fromDir</span><span class="p">,</span> <span class="nx">toDir</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">playing</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">turn</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">compatibleDir</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getCompatibleDir</span><span class="p">();</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">toDir</span> <span class="o">!=</span> <span class="nx">compatibleDir</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+
+  <span class="p">}</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">hasStart</span><span class="p">)</span> <span class="k">this</span><span class="p">.</span><span class="nx">startGame</span><span class="p">();</span>
+
+
+  <span class="kd">var</span> <span class="nx">piece</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">circleSwipe</span><span class="p">.</span><span class="nx">dirs</span><span class="p">[</span><span class="nx">toDir</span><span class="p">][</span><span class="mi">0</span><span class="p">].</span><span class="nx">graph</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">winTurn</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">isPieceCompatible</span><span class="p">(</span><span class="nx">piece</span><span class="p">);</span>
+
+  <span class="kd">var</span> <span class="nx">extraParam</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">winTurn</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">extraParam</span><span class="p">.</span><span class="nx">shiftAll</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nx">extraParam</span><span class="p">.</span><span class="nx">moveDestBy</span> <span class="o">=</span> <span class="mi">50</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">circleSwipe</span><span class="p">.</span><span class="nx">translate</span><span class="p">(</span><span class="nx">fromDir</span><span class="p">,</span> <span class="nx">toDir</span><span class="p">,</span> <span class="nx">extraParam</span><span class="p">);</span>
+<span class="p">}</span></pre></div></td></tr><tr id="section-30"><td class="docs"><div class="pilwrap"><a href="#section-30" class="pilcrow">&#182;</a></div><h2>StartGame</h2>
+
+<p>Hide some UI when the game start</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">GameScene</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">startGame</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span>
+<span class="p">{</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">hasStart</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+
+  <span class="nx">CS</span><span class="p">.</span><span class="nx">PlayerInfo</span><span class="p">.</span><span class="nx">incrGamePlayed</span><span class="p">();</span>
+  <span class="nx">CS</span><span class="p">.</span><span class="nx">PlayerInfo</span><span class="p">.</span><span class="nx">unlockAchievement</span><span class="p">(</span><span class="s1">&#39;games&#39;</span><span class="p">,</span> <span class="nx">CS</span><span class="p">.</span><span class="nx">PlayerInfo</span><span class="p">.</span><span class="nx">getGamePlayed</span><span class="p">());</span>
+
+  <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">tlIntro</span><span class="p">){</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">tlIntro</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">tlIntro</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">arrow</span><span class="p">);</span>
+
+  <span class="kd">var</span> <span class="nx">centerContainer</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">circleSwipe</span><span class="p">.</span><span class="nx">getContainer</span><span class="p">(</span><span class="nx">UI</span><span class="p">.</span><span class="nx">CircleSwipe</span><span class="p">.</span><span class="nx">CENTER</span><span class="p">);</span>
+  <span class="nx">TweenLite</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="nx">centerContainer</span><span class="p">.</span><span class="nx">scale</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> <span class="nx">ease</span><span class="o">:</span> <span class="nx">Power4</span><span class="p">.</span><span class="nx">easeOut</span><span class="p">},</span> <span class="s1">&#39;start&#39;</span><span class="p">);</span>
+
+  <span class="nx">TweenLite</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">tipText</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="p">{</span><span class="nx">alpha</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span> <span class="nx">onComplete</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">self</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">tipText</span><span class="p">);</span>
+  <span class="p">}});</span>
+
+  <span class="kd">var</span> <span class="nx">tl</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TimelineMax</span><span class="p">();</span>
+  <span class="nx">tl</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">logo</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="p">{</span><span class="nx">alpha</span><span class="o">:</span><span class="mi">0</span><span class="p">},</span> <span class="s1">&#39;start&#39;</span><span class="p">);</span>
+  <span class="nx">tl</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">statHolder</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="p">{</span><span class="nx">alpha</span><span class="o">:</span> <span class="mi">0</span><span class="p">},</span> <span class="s1">&#39;start&#39;</span><span class="p">);</span>
+  <span class="nx">tl</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">menu</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="p">{</span><span class="nx">alpha</span><span class="o">:</span> <span class="mi">0</span><span class="p">},</span> <span class="s1">&#39;start&#39;</span><span class="p">);</span>
+
+  <span class="nx">tl</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">self</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">logo</span><span class="p">);</span>
+    <span class="nx">self</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">statHolder</span><span class="p">);</span>
+    <span class="nx">self</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">menu</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">retract</span><span class="p">();</span>
+<span class="p">}</span></pre></div></td></tr><tr id="section-31"><td class="docs"><div class="pilwrap"><a href="#section-31" class="pilcrow">&#182;</a></div><h2>GenerateRound</h2>
+
+<p>Generate a new level</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">GameScene</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">generateRound</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">useLastMode</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">circleSwipe</span><span class="p">.</span><span class="nx">getSwipe</span><span class="p">().</span><span class="nx">reactive</span><span class="p">();</span>
+
+  <span class="kd">var</span> <span class="nx">lastMode</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">levels</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">mode</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">mode</span> <span class="o">=</span> <span class="p">(</span><span class="o">!</span><span class="nx">useLastMode</span><span class="p">)</span> <span class="o">?</span> <span class="k">this</span><span class="p">.</span><span class="nx">randMode</span><span class="p">()</span> <span class="o">:</span> <span class="nx">lastMode</span><span class="p">;</span>
+
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">levels</span><span class="p">.</span><span class="nx">shift</span><span class="p">();</span>
+
+  <span class="kd">var</span> <span class="nx">newMode</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">levels</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">mode</span><span class="p">;</span>
+
+  <span class="kd">var</span> <span class="nx">ignorePieces</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="nx">ignorePieces</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">levels</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">meta</span><span class="p">.</span><span class="nx">discover</span><span class="p">.</span><span class="nx">toString</span><span class="p">()]</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">levels</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">meta</span><span class="p">.</span><span class="nx">discover</span><span class="p">.</span><span class="nx">alpha</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+  <span class="nx">TweenLite</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">levels</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">meta</span><span class="p">.</span><span class="nx">discover</span><span class="p">.</span><span class="nx">scale</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">ease</span><span class="o">:</span> <span class="nx">Back</span><span class="p">.</span><span class="nx">easeOut</span><span class="p">});</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">levels</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
+    <span class="nx">meta</span><span class="o">:</span> <span class="nx">CS</span><span class="p">.</span><span class="nx">pool</span><span class="p">.</span><span class="nx">generateStep</span><span class="p">(</span><span class="nx">mode</span><span class="p">,</span> <span class="nx">ignorePieces</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">randDifficulty</span><span class="p">()),</span>
+    <span class="nx">mode</span><span class="o">:</span> <span class="nx">mode</span>
+  <span class="p">});</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">displayRound</span><span class="p">();</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">matchContainer</span><span class="p">.</span><span class="nx">bounceCircle</span><span class="p">();</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">levels</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">meta</span><span class="p">.</span><span class="nx">discover</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">levels</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">meta</span><span class="p">.</span><span class="nx">discover</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">circleSwipe</span><span class="p">.</span><span class="nx">addCenter</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">levels</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">meta</span><span class="p">.</span><span class="nx">discover</span><span class="p">);</span>
+
+<span class="p">}</span></pre></div></td></tr><tr id="section-32"><td class="docs"><div class="pilwrap"><a href="#section-32" class="pilcrow">&#182;</a></div><h2>AddEntityHandler</h2>
+</td><td class="code"><div class="highlight"><pre><span class="nx">GameScene</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">addEntityHandler</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">dir</span><span class="p">,</span> <span class="nx">graph</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">dir</span> <span class="o">==</span> <span class="nx">UI</span><span class="p">.</span><span class="nx">CircleSwipe</span><span class="p">.</span><span class="nx">CENTER</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+
+  <span class="nx">graph</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="nx">graph</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="nx">graph</span><span class="p">.</span><span class="nx">alpha</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+  <span class="kd">var</span> <span class="nx">tl</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TimelineMax</span><span class="p">();</span>
+  <span class="nx">tl</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="nx">graph</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="p">{</span><span class="nx">alpha</span><span class="o">:</span><span class="mi">1</span><span class="p">},</span> <span class="s1">&#39;start&#39;</span><span class="p">);</span>
+  <span class="nx">tl</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="nx">graph</span><span class="p">.</span><span class="nx">scale</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> <span class="nx">ease</span><span class="o">:</span> <span class="nx">Back</span><span class="p">.</span><span class="nx">easeOut</span><span class="p">},</span> <span class="s1">&#39;start&#39;</span><span class="p">);</span>
+<span class="p">}</span></pre></div></td></tr><tr id="section-33"><td class="docs"><div class="pilwrap"><a href="#section-33" class="pilcrow">&#182;</a></div><h2>AddLogo</h2>
+</td><td class="code"><div class="highlight"><pre><span class="nx">GameScene</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">addLogo</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">doAnim</span><span class="p">)</span>
+<span class="p">{</span></pre></div></td></tr><tr id="section-34"><td class="docs"><div class="pilwrap"><a href="#section-34" class="pilcrow">&#182;</a></div><p>Logo de l'appli</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="k">this</span><span class="p">.</span><span class="nx">logo</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">UI</span><span class="p">.</span><span class="nx">Logo</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">logo</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="o">~~</span><span class="p">(</span><span class="nx">CS</span><span class="p">.</span><span class="nx">display</span><span class="p">.</span><span class="nx">width</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">logo</span><span class="p">.</span><span class="nx">width</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">logo</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="mi">75</span><span class="p">;</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">logo</span><span class="p">);</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="nx">doAnim</span><span class="p">)</span> <span class="k">this</span><span class="p">.</span><span class="nx">animUI</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">logo</span><span class="p">);</span>
+<span class="p">}</span></pre></div></td></tr><tr id="section-35"><td class="docs"><div class="pilwrap"><a href="#section-35" class="pilcrow">&#182;</a></div><h2>RefreshAdsBtn</h2>
+</td><td class="code"><div class="highlight"><pre><span class="nx">GameScene</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">refreshAdsBtn</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">menu</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">menu</span><span class="p">.</span><span class="nx">refreshAdsBtn</span><span class="p">();</span>
+<span class="p">}</span></pre></div></td></tr><tr id="section-36"><td class="docs"><div class="pilwrap"><a href="#section-36" class="pilcrow">&#182;</a></div><h2>AddMenu</h2>
+</td><td class="code"><div class="highlight"><pre><span class="nx">GameScene</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">addMenu</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">doAnim</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">menu</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">UI</span><span class="p">.</span><span class="nx">Menu</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">menu</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="mi">300</span><span class="p">;</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">menu</span><span class="p">);</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">doAnim</span><span class="p">)</span> <span class="k">this</span><span class="p">.</span><span class="nx">animUI</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">menu</span><span class="p">);</span>
+
+<span class="p">}</span></pre></div></td></tr><tr id="section-37"><td class="docs"><div class="pilwrap"><a href="#section-37" class="pilcrow">&#182;</a></div><h2>AnimUI</h2>
+</td><td class="code"><div class="highlight"><pre><span class="nx">GameScene</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">animUI</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">displayObject</span><span class="p">){</span>
+  <span class="nx">displayObject</span><span class="p">.</span><span class="nx">alpha</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="nx">TweenLite</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="nx">displayObject</span><span class="p">,</span> <span class="nx">CS</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">gameScene</span><span class="p">.</span><span class="nx">animUIDuration</span><span class="p">,</span> <span class="p">{</span><span class="nx">alpha</span><span class="o">:</span><span class="mi">1</span><span class="p">});</span>
+<span class="p">}</span></pre></div></td></tr><tr id="section-38"><td class="docs"><div class="pilwrap"><a href="#section-38" class="pilcrow">&#182;</a></div><h2>AddStats</h2>
+</td><td class="code"><div class="highlight"><pre><span class="nx">GameScene</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">addStats</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">doAnim</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">statHolder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">UI</span><span class="p">.</span><span class="nx">Stat</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">statHolder</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="o">~~</span><span class="p">(</span><span class="nx">CS</span><span class="p">.</span><span class="nx">display</span><span class="p">.</span><span class="nx">width</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">statHolder</span><span class="p">.</span><span class="nx">width</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">statHolder</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">CS</span><span class="p">.</span><span class="nx">display</span><span class="p">.</span><span class="nx">height</span> <span class="o">-</span> <span class="mi">280</span><span class="p">;</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">statHolder</span><span class="p">);</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="nx">doAnim</span><span class="p">)</span> <span class="k">this</span><span class="p">.</span><span class="nx">animUI</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">statHolder</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">GameScene</span> <span class="o">=</span> <span class="nx">GameScene</span><span class="p">;</span>
+
+<span class="p">})(</span><span class="nb">window</span><span class="p">.</span><span class="nx">Scene</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">Scene</span> <span class="o">||</span> <span class="nx">Scene</span><span class="p">);</span>
+
+</pre></div></td></tr></tbody></table><div id="generated">generated Mon Dec 15 2014 18:42:10 GMT+0100 (CET)  </div></div></body></html>
